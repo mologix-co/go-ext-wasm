@@ -11,12 +11,13 @@ keywords = ["golang", "extension", "webassembly"]
 categories = ["wasm"]
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "staticlib"]
 
 [dependencies.wasmer-runtime]
-version = "0.17.0"
+version = "0.17"
 default-features = false
 features = ["llvm", "default-backend-llvm"]
+
 
 [dependencies.wasmer-runtime-c-api]
 version = "0.17"

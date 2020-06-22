@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	wasm "github.com/mologix-co/wasmer-go/wasmer"
 	"github.com/urfave/cli/v2"
-	wasm "github.com/wasmerio/go-ext-wasm/wasmer"
 	"log"
 	"os"
 	"strconv"

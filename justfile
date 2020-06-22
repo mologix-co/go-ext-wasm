@@ -11,19 +11,24 @@ build-runtime:
 		"macos")
 			shared_library_path=$( ls -t target/release/deps/libwasmer_runtime_c_api*.dylib | head -n 1 )
 			shared_library=libwasmer_runtime_c_api.dylib
+			output_library=libwasmer.dylib
 			;;
 		"windows")
 			shared_library_path=$( ls -t target/release/deps/wasmer_runtime_c_api*.dll | head -n 1 )
 			shared_library=wasmer_runtime_c_api.dll
+			output_library=libwasmer.dll
 			;;
 		*)
 			shared_library_path=$( ls -t target/release/deps/libwasmer_runtime_c_api*.so | head -n 1 )
 			shared_library=libwasmer_runtime_c_api.so
+			output_library=libwasmer.so
 	esac
 
 	# Link `wasmer/*wasmer_runtime_c_api.*`.
-	rm -f wasmer/${shared_library}
-	ln -s "../${shared_library_path}" wasmer/${shared_library}
+	rm -f wasmer/${output_library}
+		# ln -s "../${shared_library_path}" wasmer/${output_library}
+	cp ${shared_library_path} wasmer/${output_library}
+
 
 # Build the `wasmer` library.
 build go-build-args='-v':
