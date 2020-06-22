@@ -13,5 +13,12 @@ categories = ["wasm"]
 [lib]
 crate-type = ["cdylib"]
 
-[dependencies]
-wasmer-runtime-c-api = "0.14"
+[dependencies.wasmer-runtime]
+version = "0.17.0"
+default-features = false
+features = ["llvm", "default-backend-llvm"]
+
+[dependencies.wasmer-runtime-c-api]
+version = "0.17"
+default-features = false
+features = ["llvm-backend", "wasi"]

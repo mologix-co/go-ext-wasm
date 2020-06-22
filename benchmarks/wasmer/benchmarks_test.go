@@ -1,7 +1,7 @@
 package wasmer_test
 
 import (
-	"github.com/wasmerio/go-ext-wasm/wasmer"
+	"github.com/mologix-co/wasmer-go/wasmer"
 	"path"
 	"runtime"
 	"testing"
@@ -20,10 +20,12 @@ func GetBytes(wasmFile string) []byte {
 
 func benchmarkWasmer(b *testing.B, wasmFile string, exportName string, exportValues ...interface{}) {
 	wasmBytes := GetBytes(wasmFile)
+	instance, _ := wasmer.NewInstance(wasmBytes)
+	export := instance.Exports[exportName]
 
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		instance, _ := wasmer.NewInstance(wasmBytes)
-		result, _ := instance.Exports[exportName](exportValues...)
+		result, _ := export(exportValues...)
 
 		_ = result
 	}
