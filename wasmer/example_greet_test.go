@@ -2,7 +2,7 @@ package wasmer_test
 
 import (
 	"fmt"
-	wasm "github.com/wasmerio/go-ext-wasm/wasmer"
+	wasm "github.com/mologix-co/wasmer-go/wasmer"
 	"path"
 	"runtime"
 	"strings"
@@ -25,7 +25,7 @@ func Example_greet() {
 
 	// Allocate memory for the subject, and get a pointer to it.
 	// Include a byte for the NULL terminator we add below.
-	allocateResult, _ := instance.Exports["allocate"](lengthOfSubject+1)
+	allocateResult, _ := instance.Exports["allocate"](lengthOfSubject + 1)
 	inputPointer := allocateResult.ToI32()
 
 	// Write the subject into the memory.
